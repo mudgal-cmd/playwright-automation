@@ -1,0 +1,14 @@
+# Dependencies and temp files
+.DS_Store
+node_modules
+.tmp
+npm-debug.log
+
+# Playwright reports and caches
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# Auth/session state
+.auth/
