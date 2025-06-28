@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
-import { LoginPage } from "../../lib/pages/login.page";
-import { registerUser } from "../../lib/datafactory/register";
+import { LoginPage } from "@pages/login.page"; //like below we have defined a short way of locating the directories in tsconfig.json.
+// import { registerUser } from "../../lib/datafactory/register";
+import { registerUser } from "@datafactory/register";
 
 test("login without page object", async ({ page }) => {
   // await page.goto("https://practicesoftwaretesting.com/");
