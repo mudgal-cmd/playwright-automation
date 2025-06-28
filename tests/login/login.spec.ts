@@ -1,9 +1,10 @@
 import { test, expect } from "@playwright/test";
-import {LoginPage} from "../../lib/pages/login.page";
+import { LoginPage } from "../../lib/pages/login.page";
+import { registerUser } from "../../lib/datafactory/register";
 
 test("login without page object", async ({ page }) => {
   // await page.goto("https://practicesoftwaretesting.com/");
-  const loginPage = new LoginPage(page);//constructor of LoginPage clas gets initialized automatically at this step
+  const loginPage = new LoginPage(page); //constructor of LoginPage clas gets initialized automatically at this step
 
   await loginPage.goto("https://practicesoftwaretesting.com/");
   // await page.locator('[data-test="nav-sign-in"]').click();
@@ -23,4 +24,21 @@ test("login without page object", async ({ page }) => {
   await expect(page.locator('[data-test="page-title"]')).toContainText(
     "My account"
   );
+});
+
+test("Login with newly created user", async ({ page }) => {
+  const email = `test${Date.now()}@gmail.com`;
+  const password = "abcdefJH123@";
+  await registerUser(email, password);
+  const loginPage = new LoginPage(page); //constructor of LoginPage clas gets initialized automatically at this step
+  await loginPage.goto("https://practicesoftwaretesting.com/");
+  await loginPage.clickSignInLink();
+  await loginPage.login(email, password);
+
+  await expect(page.locator('[data-test="nav-menu"]')).toContainText(
+    "test testlname"
+  );
+  // await expect(page.locator('[data-test="page-title"]')).toContainText(
+  //   "My account"
+  // );
 });

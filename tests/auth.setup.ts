@@ -17,3 +17,4 @@ setup("Create customer 01 auth", async ({ page, context }) => {
   await expect(page.getByTestId("nav-menu")).toContainText("Jane Doe");
   await context.storageState({ path: customer01AuthFile });
 });
+

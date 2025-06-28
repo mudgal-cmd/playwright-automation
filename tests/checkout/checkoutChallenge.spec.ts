@@ -1,4 +1,6 @@
 import { test, expect } from "@playwright/test";
+import { randomState } from "../../lib/helpers/states";
+import { LoginPage } from "../../lib/pages/login.page";
 
 test.describe("Checkout challenge", async () => {
   test.use({ storageState: ".auth/customer01.json" });
@@ -8,18 +10,29 @@ test.describe("Checkout challenge", async () => {
   });
 
   test("buy now pay later", async ({ page, headless }) => {
+
+    const state = randomState();
+
     await page.getByText("Claw Hammer with Shock Reduction Grip").click();
     await page.getByTestId("add-to-cart").click();
     await expect(page.getByTestId("cart-quantity")).toHaveText("1");
     await page.getByTestId("nav-cart").click();
     await page.getByTestId("proceed-1").click();
+    
+    if ((await page.getByTestId("nav-sign-in").innerText()).includes("Sign in")){
+
+      const loginPage = new LoginPage(page); 
+      loginPage.login("customer@practicesoftwaretesting.com","welcome01");
+    }
+
     await page.getByTestId("proceed-2").click();
     await expect(
       page.locator(".step-indicator").filter({ hasText: "2" })
     ).toHaveCSS("background-color", "rgb(51, 153, 51)");
     await page.getByTestId("street").fill("123 Testing Way");
     await page.getByTestId("city").fill("Sacramento");
-    await page.getByTestId("state").fill("California");
+    await page.getByTestId("state").fill(state);
+    console.log("The random state picked is: ",state);
     await page.getByTestId("country").fill("USA");
     await page.getByTestId("postal_code").fill("98765");
     await page.getByTestId("proceed-3").click();
