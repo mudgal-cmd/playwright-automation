@@ -1,4 +1,4 @@
-import { defineConfig, devices } from "@playwright/test";
+import { defineConfig, devices, expect } from "@playwright/test";
 
 /**
  * Read environment variables from file.
@@ -41,15 +41,21 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
-    {
-      name: "setup",
-      testMatch: /.*\.setup\.ts/,
-    },
-    {
-      name: "chromium",
-      dependencies: ["setup"],
-      use: { ...devices["Desktop Chrome"], permissions: ["clipboard-read"] },
-    },
+    
+
+    // {
+    //   name: "setup",
+    //   testMatch: /.*\.setup\.ts/,
+    // },
+    // {
+    //   name: "chromium",
+    //   dependencies: ["setup"],
+    //   use: { ...devices["Desktop Chrome"], permissions: ["clipboard-read"] },
+    // },
+    // {
+    //   name: "default",
+    //   testMatch: /.*\.(spec|test)\.(ts|js)/,
+    // },
     // {
     //   name: 'firefox',
     //   dependencies: ["setup"],
@@ -77,10 +83,10 @@ export default defineConfig({
     //   name: 'Microsoft Edge',
     //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
     // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    // },
+    {
+      name: 'Google Chrome',
+      use: { ...devices['Desktop Chrome'], channel: 'chrome' },
+    },
   ],
 
   /* Run your local dev server before starting the tests */
@@ -90,3 +96,23 @@ export default defineConfig({
   //   reuseExistingServer: !process.env.CI,
   // },
 });
+
+expect.extend({ //custom assertion
+  toBeNumber(received:Number){
+    const check = typeof received == "number";
+
+    if(check){
+      return {
+        message:()=> "passed",
+        pass: true,
+      };
+    }
+    else{
+      return {
+        message:()=>`toBeNumber() assertion failed.\nYou expected '${received}' to be a number but it's a '${typeof received}'`,
+        pass:false
+      };
+    }
+
+  }
+})
