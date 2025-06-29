@@ -10,8 +10,8 @@ export async function registerUser(email:string, password:string) {
 
   const response = await createRequestContext.post(`${apiUrl}/users/register`, {
     data: {
-      first_name: "test",
-      last_name: "testlname",
+      first_name: "Johnny",
+      last_name: "Knox",
       dob: "2000-12-12",
       phone: "9087654321",
       email: email,
@@ -24,17 +24,17 @@ export async function registerUser(email:string, password:string) {
         postal_code: "34211",
       },
     },
-    headers: {
-      "sec-ch-ua-platform": '"Windows"',
-      Referer: "https://practicesoftwaretesting.com/",
-      "Accept-Language": "en-US",
-      "sec-ch-ua": '"Not:A-Brand";v="24", "Chromium";v="134"',
-      "sec-ch-ua-mobile": "?0",
-      "User-Agent":
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.6998.35 Safari/537.36",
-      Accept: "application/json, text/plain, */*",
-      "Content-Type": "application/json",
-    },
+    // headers: {
+    //   "sec-ch-ua-platform": '"Windows"',
+    //   Referer: "https://practicesoftwaretesting.com/",
+    //   "Accept-Language": "en-US",
+    //   "sec-ch-ua": '"Not:A-Brand";v="24", "Chromium";v="134"',
+    //   "sec-ch-ua-mobile": "?0",
+    //   "User-Agent":
+    //     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.6998.35 Safari/537.36",
+    //   Accept: "application/json, text/plain, */*",
+    //   "Content-Type": "application/json",
+    // },
   });
   console.log("api request completed");
   expect(response.status()).toBe(201);

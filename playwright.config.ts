@@ -43,15 +43,15 @@ export default defineConfig({
   projects: [
     
 
-    // {
-    //   name: "setup",
-    //   testMatch: /.*\.setup\.ts/,
-    // },
-    // {
-    //   name: "chromium",
-    //   dependencies: ["setup"],
-    //   use: { ...devices["Desktop Chrome"], permissions: ["clipboard-read"] },
-    // },
+    {
+      name: "setup",
+      testMatch: /.*\.setup\.ts/,
+    },
+    {
+      name: "chromium",
+      dependencies: ["setup"],
+      use: { ...devices["Desktop Chrome"], permissions: ["clipboard-read"] },
+    },
     // {
     //   name: "default",
     //   testMatch: /.*\.(spec|test)\.(ts|js)/,
@@ -115,4 +115,18 @@ expect.extend({ //custom assertion
     }
 
   }
-})
+});
+
+// expect.extend({
+
+//   toContainText(received:string){
+    
+//     const check = typeof received == "string";
+
+//     if (check){
+
+//     }
+
+//   }
+
+// });

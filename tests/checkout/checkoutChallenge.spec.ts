@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { randomState } from "@helpers/states";
-import { LoginPage } from "@pages/login.page";
+import { LoginPage } from "@pages/login/login.page";
 
 test.describe("Checkout challenge", async () => {
   test.use({ storageState: ".auth/customer01.json" });

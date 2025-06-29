@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { LoginPage } from "@pages/login.page"; //like below we have defined a short way of locating the directories in tsconfig.json.
+import { LoginPage } from "@pages/login/login.page"; //like below we have defined a short way of locating the directories in tsconfig.json.
 // import { registerUser } from "../../lib/datafactory/register";
 import { registerUser } from "@datafactory/register";
 
