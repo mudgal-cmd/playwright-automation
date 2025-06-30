@@ -9,7 +9,8 @@ test("Create contact message", async ({ page, context }) => {
   const password = "WelcomeGold23@";
   const messageAuthFile = ".auth/messageAuth.json";
   const contactPage = new ContactFormPage(page);
-  const message = "I am a message used to create a contact form to submit it. I can have a minimum of 50 characters. I think 50 characters are done."
+  const message =
+    "I am a message used to create a contact form to submit it. I can have a minimum of 50 characters. I think 50 characters are done.";
 
   //now moving to login into the app using the same credentials with which we registered the user
 
@@ -33,9 +34,13 @@ test("Create contact message", async ({ page, context }) => {
   });
 
   //without create message datafactory
-  await test.step("Create a message", async ()=>{
+  await test.step.skip("Create a message without datafactory", async () => {
     await contactPage.goto();
     await contactPage.sendMessage(message, "Warranty");
     await contactPage.validateMessageSent();
+  });
+
+  await test.step("Create message with datafactory", async () => {
+    await createContactMessage(messageAuthFile, "payments", message);
   });
 });
